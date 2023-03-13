@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import CanvasDraw from "./CanvasDraw";
 import { Orbit } from '@uiball/loaders'
-import axios from "axios";
+import api from "../api";
 
 const CanvasSection = () => {
 
@@ -16,23 +16,16 @@ const CanvasSection = () => {
 
         setIsLoading(true);
 
-        let { data: prediction } = await axios.post('http://localhost:5000/upload',
-            {
-                prompt,
-                drawing: canvasRef.current.toDataURL('image/png')
-            },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+        let { data: prediction } = await api.post('/upload', {
+            prompt,
+            drawing: canvasRef.current.toDataURL('image/png')
+        });
 
         while (prediction.status !== "succeeded" && prediction.status !== "failed") {
             await new Promise((r) => setTimeout(r, 500));
-            const { data } = await axios.get(`http://localhost:5000/prediction/${prediction.id}`);
+            
+            const { data } = await api.get(`/prediction/${prediction.id}`);
 
-
-            console.log(data)
             prediction = data;
 
             setPrediction(prediction);
