@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
@@ -17,11 +16,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(fileUpload({
-    useTempFiles: true,
-    tempFileDir: '/tmp/'
-}));
-
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -29,7 +23,7 @@ cloudinary.config({
 });
 
 app.get('/', function (req, res) {
-    res.json({ hola: "amigos" });
+    res.json({ hello: "friends!" });
 })
 
 app.post('/upload', async (req, res) => {
