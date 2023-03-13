@@ -1,15 +1,20 @@
 import { useState, useRef } from "react";
 import CanvasDraw from "./CanvasDraw";
+import { Orbit } from '@uiball/loaders'
 import axios from "axios";
 
 const CanvasSection = () => {
 
-    const [prediction, setPrediction] = useState(null);
+    const [prediction, setPrediction] = useState({ status: 'starting' });
     const [prompt, setPrompt] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
     const canvasRef = useRef(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        setIsLoading(true);
 
         let { data: prediction } = await axios.post('http://localhost:5000/upload',
             {
@@ -22,9 +27,6 @@ const CanvasSection = () => {
                 }
             })
 
-        console.log(prediction)
-
-
         while (prediction.status !== "succeeded" && prediction.status !== "failed") {
             await new Promise((r) => setTimeout(r, 500));
             const { data } = await axios.get(`http://localhost:5000/prediction/${prediction.id}`);
@@ -35,6 +37,8 @@ const CanvasSection = () => {
 
             setPrediction(prediction);
         }
+
+        setIsLoading(false);
     }
 
     return (
@@ -65,11 +69,17 @@ const CanvasSection = () => {
                 </form>
 
                 <div className="rounded-xl overflow-hidden flex">
-                    {!prediction?.output ? (
+                    {!prediction.output ? (
                         <div className='flex-1 border-4 border-primary bg-primary text-neutral-800 min-h-[400px] font-black text-3xl p-8 pr-11 rounded-xl md:text-5xl'>
-                            {prediction ? prediction.status : 'Just start drawing on our canvas and let AI do the rest'}
+                            Just start drawing on our canvas and let AI do the rest
+                            {isLoading && (
+                                <div className="flex flex-col items-center mt-5">
+                                    <Orbit size={35} color="#231F20" />
+                                    <span className="text-lg">{`${prediction.status}...`}</span>
+                                </div>
+                            )}
                         </div>) : (
-                        <img src={prediction.output[1]} alt="" className="w-full" />
+                        <img src={prediction.output[1]} alt={prompt} className="w-full" />
                     )}
                 </div>
 
