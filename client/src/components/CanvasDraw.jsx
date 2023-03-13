@@ -1,18 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
 import { BiTrash } from 'react-icons/bi';
 import { BiPencil } from 'react-icons/bi';
 import { BiEraser } from 'react-icons/bi';
 
-const CanvasDraw = () => {
+const CanvasDraw = forwardRef((props, canvasRef) => {
 
     const [history, setHistory] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [isDrawing, setIsDrawing] = useState(false);
     const [selectedTool, setSelectedTool] = useState('pencil');
 
-    const canvasRef = useRef(null);
     const ctxRef = useRef(null);
 
     useEffect(() => {
@@ -42,8 +41,6 @@ const CanvasDraw = () => {
 
         setHistory([...history.slice(0, selectedIndex + 1), ctxRef.current.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height)]);
         setSelectedIndex(selectedIndex + 1);
-
-        console.log(history)
     };
 
     const draw = ({ nativeEvent }) => {
@@ -94,7 +91,7 @@ const CanvasDraw = () => {
                 onTouchEnd={stopDrawing}
             />
 
-            <div className='flex flex-wrap justify-between bg-neutral-800 p-4 text-neutral-500'>
+            <div className='absolute bottom-0 left-0 right-0 mb-2 mx-3 flex flex-wrap justify-between bg-neutral-800 py-2 px-4 text-neutral-500 rounded-full'>
                 <button
                     className='flex gap-1 items-center font-semibold disabled:text-neutral-700 hover:text-neutral-400 active:text-neutral-200'
                     onClick={undoDrawing}
@@ -134,6 +131,6 @@ const CanvasDraw = () => {
             </div>
         </>
     )
-}
+})
 
 export default CanvasDraw;
