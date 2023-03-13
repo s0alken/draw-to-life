@@ -22,7 +22,7 @@ const CanvasSection = () => {
             drawing: canvasRef.current.toDataURL('image/png')
         });
 
-        console.log(data);
+        console.log(prediction);
 
         while (prediction.status !== "succeeded" && prediction.status !== "failed") {
             await new Promise((r) => setTimeout(r, 500));
