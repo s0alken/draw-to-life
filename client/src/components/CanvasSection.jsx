@@ -13,6 +13,7 @@ const CanvasSection = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("url", import.meta.env.VITE_API_URL);
 
         setIsLoading(true);
 
@@ -21,7 +22,6 @@ const CanvasSection = () => {
             drawing: canvasRef.current.toDataURL('image/png')
         });
 
-        console.log("url", import.meta.env.VITE_API_URL);
         console.log(data);
 
         while (prediction.status !== "succeeded" && prediction.status !== "failed") {
