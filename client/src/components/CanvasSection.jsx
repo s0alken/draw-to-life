@@ -1,6 +1,10 @@
 import { useState, useRef } from "react";
+import { saveAs } from 'file-saver'
 import CanvasDraw from "./CanvasDraw";
 import { Orbit } from '@uiball/loaders'
+import { IoCloseCircleSharp } from 'react-icons/io5';
+import { BsFillFileImageFill } from 'react-icons/bs';
+import { BiDownload } from 'react-icons/bi';
 import api from "../api";
 
 const CanvasSection = () => {
@@ -13,7 +17,6 @@ const CanvasSection = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("url", import.meta.env.VITE_API_URL);
 
         setIsLoading(true);
 
@@ -22,11 +25,9 @@ const CanvasSection = () => {
             drawing: canvasRef.current.toDataURL('image/png')
         });
 
-        console.log(prediction);
-
         while (prediction.status !== "succeeded" && prediction.status !== "failed") {
             await new Promise((r) => setTimeout(r, 500));
-            
+
             const { data } = await api.get(`/prediction/${prediction.id}`);
 
             prediction = data;
@@ -38,44 +39,68 @@ const CanvasSection = () => {
     }
 
     return (
-        <section className='p-9'>
+        <section className='p-3 pb-8'>
             <div className='mx-auto text-center max-w-sm lg:max-w-xl'>
                 <h1 className='font-black mb-4 text-3xl leading-10 xl:text-5xl text-white'>
                     Bring Your Drawings to Life with AI
                 </h1>
-                <p className='text-xs text-neutral-600 xl:text-lg mb-6'>
+                <p className='text-xs font-semibold text-neutral-500 max-w-xs mx-auto mb-6 md:max-w-none xl:text-lg'>
                     With Draw-to-Life, you can create a masterpiece from a simple sketch. Simply draw your idea in our canvas, and let the AI do the rest.
                 </p>
             </div>
 
-            <div className='grid bg-neutral-900 p-6 rounded-xl max-w-[400px] mx-auto gap-6 lg:max-w-4xl lg:grid-cols-2'>
+            <div className='grid bg-neutral-900 p-4 rounded-xl max-w-[400px] w-fit mx-auto gap-4 lg:max-w-none lg:grid-cols-[400px_400px]'>
 
                 <div className='relative rounded-xl overflow-hidden'>
                     <CanvasDraw ref={canvasRef} />
                 </div>
 
                 <form onSubmit={handleSubmit} className='flex flex-col gap-3 lg:flex-row lg:gap-0 lg:order-3 lg:col-span-2'>
-                    <input
-                        type="text"
-                        className='flex-1 bg-transparent py-2 px-3 font-bold focus:outline-none text-white border-4 border-primary rounded-lg lg:border-r-0 lg:rounded-r-none'
-                        value={prompt}
-                        onChange={e => setPrompt(e.target.value)}
-                    />
-                    <button className='bg-primary whitespace-nowrap rounded-lg font-bold py-4 px-7 lg:rounded-l-none'>Make it real!</button>
+                    <div className="relative flex-1">
+                        <input
+                            type="text"
+                            className='w-full h-full bg-transparent p-3 font-bold text-white border-2 border-primary rounded-lg focus:outline-none placeholder:font-bold placeholder:text-neutral-600 md:border-4 lg:border-r-0 lg:rounded-r-none'
+                            value={prompt}
+                            onChange={e => setPrompt(e.target.value)}
+                            placeholder="Tell us what are you drawing, E.g: 'A happy dog'"
+                        />
+                        {!!prompt.length && (
+                            <IoCloseCircleSharp
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-primary cursor-pointer text-2xl lg:text-3xl"
+                                onClick={() => setPrompt('')}
+                            />
+                        )}
+                    </div>
+                    <button className='bg-primary whitespace-nowrap rounded-lg font-bold p-3 lg:py-4 lg:px-6 lg:rounded-l-none'>Make it real!</button>
                 </form>
 
                 <div className="rounded-xl overflow-hidden flex">
                     {!prediction.output ? (
-                        <div className='flex-1 border-4 border-primary bg-primary text-neutral-800 min-h-[400px] font-black text-3xl p-8 pr-11 rounded-xl md:text-5xl'>
-                            Just start drawing on our canvas and let AI do the rest
-                            {isLoading && (
-                                <div className="flex flex-col items-center mt-5">
-                                    <Orbit size={35} color="#231F20" />
-                                    <span className="text-lg">{`${prediction.status}...`}</span>
-                                </div>
-                            )}
+                        <div className='flex-1 flex flex-col justify-center items-center min-h-[400px] rounded-xl border-2 border-dashed border-neutral-600 text-neutral-600 font-bold tracking-wider'>
+                            <div className="flex flex-col items-center gap-4">
+                                {isLoading ? (
+                                    <>
+                                        <Orbit size={35} color="#565656" />
+                                        <span className="capitalize">{`${prediction.status}...`}</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <BsFillFileImageFill className="text-4xl" />
+                                        <span className="capitalize">The result will be shown here</span>
+                                    </>
+                                )}
+                            </div>
                         </div>) : (
-                        <img src={prediction.output[1]} alt={prompt} className="w-full" />
+                        <div className="relative group">
+                            <img src={prediction.output[1]} alt={prompt} className="w-full" />
+                            <button
+                                className="absolute flex items-center gap-2 top-0 right-0 bg-neutral-800 px-3 py-1 rounded-full m-2 text-neutral-500 font-semibold text-sm tracking-wider opacity-0 group-hover:opacity-100 hover:text-primary"
+                                onClick={() => saveAs(prediction.output[1], `${prediction.input.prompt.replaceAll(' ', '_')}.png`)}
+                            >
+                                Download
+                                <BiDownload className="text-lg" />
+                            </button>
+                        </div>
                     )}
                 </div>
 

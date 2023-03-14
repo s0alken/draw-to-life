@@ -30,7 +30,9 @@ const CanvasDraw = forwardRef((props, canvasRef) => {
     }, []);
 
     const startDrawing = ({ nativeEvent }) => {
+
         setIsDrawing(true);
+
         ctxRef.current.beginPath();
         ctxRef.current.moveTo(nativeEvent.offsetX, nativeEvent.offsetY);
     }
@@ -44,6 +46,7 @@ const CanvasDraw = forwardRef((props, canvasRef) => {
     };
 
     const draw = ({ nativeEvent }) => {
+
         if (!isDrawing) return;
 
         ctxRef.current.lineCap = 'round';
@@ -81,23 +84,20 @@ const CanvasDraw = forwardRef((props, canvasRef) => {
     return (
         <>
             <canvas
-                className={`w-full ${selectedTool === 'pencil' ? 'cursor-pencil' : 'cursor-eraser'}`}
+                className={`touch-none ${selectedTool === 'pencil' ? 'cursor-pencil' : 'cursor-eraser'}`}
                 ref={canvasRef}
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onTouchStart={startDrawing}
-                onTouchMove={draw}
-                onTouchEnd={stopDrawing}
+                onPointerDown={startDrawing}
+                onPointerMove={draw}
+                onPointerUp={stopDrawing}
             />
 
-            <div className='absolute bottom-0 left-0 right-0 mb-2 mx-3 flex flex-wrap justify-between bg-neutral-800 py-2 px-4 text-neutral-500 rounded-full'>
+            <div className='absolute bottom-0 left-0 right-0 m-2 flex flex-wrap justify-between bg-neutral-800 py-2 px-4 text-neutral-500 rounded-full'>
                 <button
                     className='flex gap-1 items-center font-semibold disabled:text-neutral-700 hover:text-neutral-400 active:text-neutral-200'
                     onClick={undoDrawing}
                     disabled={!selectedIndex}
                 >
-                    <BiUndo className='text-xl' />
+                    <BiUndo className='text-sm' />
                     <span className='text-xs tracking-wider'>Undo</span>
                 </button>
                 <button
@@ -105,27 +105,27 @@ const CanvasDraw = forwardRef((props, canvasRef) => {
                     onClick={redoDrawing}
                     disabled={selectedIndex === history.length - 1}
                 >
-                    <BiRedo className='text-xl' />
+                    <BiRedo className='text-sm' />
                     <span className='text-xs tracking-wider'>Redo</span>
                 </button>
                 <button
                     className={`flex gap-1 items-center font-semibold ${selectedTool === 'pencil' ? 'text-primary' : 'active:text-neutral-200 hover:text-neutral-400'}`}
                     onClick={() => setSelectedTool('pencil')}
                 >
-                    <BiPencil className='text-xl' />
-                    <span className='text-xs tracking-wider'>Pencil</span>
+                    <BiPencil className='text-sm' />
+                    <span className='text-xs tracking-wider'>Pen</span>
                 </button>
                 <button
                     className={`flex gap-1 items-center font-semibold ${selectedTool === 'eraser' ? 'text-primary' : 'active:text-neutral-200 hover:text-neutral-400'}`}
                     onClick={() => setSelectedTool('eraser')}
                 >
-                    <BiEraser className='text-xl' />
+                    <BiEraser className='text-sm' />
                     <span className='text-xs tracking-wider'>Eraser</span>
                 </button>
                 <button
                     className='flex gap-1 items-center font-semibold hover:text-neutral-400 active:text-neutral-200'
                     onClick={clearCanvas}>
-                    <BiTrash className='text-xl' />
+                    <BiTrash className='text-sm' />
                     <span className='text-xs tracking-wider'>Clean</span>
                 </button>
             </div>

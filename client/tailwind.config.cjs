@@ -10,8 +10,8 @@ module.exports = {
         primary: '#c4ef12'
       },
       cursor: {
-        pencil: 'url(../src/assets/pencil.svg), auto',
-        eraser: 'url(../src/assets/eraser.svg), auto'
+        pencil: 'url(../src/assets/pencil.svg) 10 10, auto',
+        eraser: 'url(../src/assets/eraser.svg) 6 6, auto'
       }
     },
   },
