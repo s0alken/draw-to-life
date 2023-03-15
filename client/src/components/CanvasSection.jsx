@@ -6,6 +6,7 @@ import { IoCloseCircleSharp } from 'react-icons/io5';
 import { BsFillFileImageFill } from 'react-icons/bs';
 import { BiDownload } from 'react-icons/bi';
 import api from "../api";
+import { motion } from "framer-motion";
 
 const CanvasSection = () => {
 
@@ -39,7 +40,24 @@ const CanvasSection = () => {
     }
 
     return (
-        <section className='p-3 pb-8'>
+        <motion.section
+            className='p-3 pb-8'
+            initial="hidden"
+            whileInView="visible"
+            variants={{
+                hidden: {
+                    y: 50,
+                    opacity: 0,
+                },
+                visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: {
+                        duration: 1.25
+                    }
+                }
+            }}
+        >
             <div className='mx-auto text-center max-w-sm lg:max-w-xl'>
                 <h1 className='font-black mb-4 text-3xl leading-10 xl:text-5xl text-white'>
                     Bring Your Drawings to Life with AI
@@ -106,7 +124,7 @@ const CanvasSection = () => {
 
             </div>
 
-        </section>
+        </motion.section>
     )
 }
 
