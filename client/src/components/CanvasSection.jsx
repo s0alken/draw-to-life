@@ -41,7 +41,7 @@ const CanvasSection = () => {
 
     return (
         <motion.section
-            className='p-3 pb-8'
+            className='p-3 pb-16'
             initial="hidden"
             whileInView="visible"
             variants={{
@@ -59,15 +59,29 @@ const CanvasSection = () => {
             }}
         >
             <div className='mx-auto text-center max-w-sm lg:max-w-xl'>
-                <h1 className='font-black mb-4 text-3xl leading-10 xl:text-5xl text-white'>
+                <h1 className='text-white font-black mb-6 text-3xl leading-10 xl:text-5xl'>
                     Bring Your Drawings to Life with AI
                 </h1>
-                <p className='text-xs font-semibold text-neutral-500 max-w-xs mx-auto mb-6 md:max-w-none xl:text-lg'>
+                {/* <p className='text-xs font-semibold text-neutral-500 max-w-xs mx-auto mb-6 md:max-w-none xl:text-lg'>
                     With Draw-to-Life, you can create a masterpiece from a simple sketch. Simply draw your idea in our canvas, and let the AI do the rest.
-                </p>
+                </p> */}
+                <ul className="text-neutral-500 font-semibold text-lg mb-8 space-y-2">
+                    <li className="flex justify-center items-center gap-2">
+                        <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">1</span>
+                        <span className="tracking-wider">Draw in the canvas</span>
+                    </li>
+                    <li className="flex justify-center items-center gap-2">
+                        <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">2</span>
+                        <span className="tracking-wider">Write in the input a description of your drawing</span>
+                    </li>
+                    <li className="flex justify-center items-center gap-2">
+                        <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">3</span>
+                        <span className="tracking-wider">Make it real!</span>
+                    </li>
+                </ul>
             </div>
 
-            <div className='grid bg-neutral-900 p-4 rounded-xl max-w-[400px] w-fit mx-auto gap-4 lg:max-w-none lg:grid-cols-[400px_400px]'>
+            <div className='grid gap-5 p-5 bg-neutral-900 rounded-xl max-w-[400px] w-fit mx-auto lg:max-w-none lg:grid-cols-[400px_400px]'>
 
                 <div className='relative rounded-xl overflow-hidden'>
                     <CanvasDraw ref={canvasRef} />
@@ -77,10 +91,10 @@ const CanvasSection = () => {
                     <div className="relative flex-1">
                         <input
                             type="text"
-                            className='w-full h-full bg-transparent p-3 font-bold text-white border-2 border-primary rounded-lg focus:outline-none placeholder:font-bold placeholder:text-neutral-600 md:border-4 lg:border-r-0 lg:rounded-r-none'
+                            className='w-full h-full bg-transparent p-3 font-bold text-white border-2 border-primary rounded-lg focus:outline-none placeholder:font-bold placeholder:text-neutral-600 md:border-[3px] lg:border-r-0 lg:rounded-r-none'
                             value={prompt}
                             onChange={e => setPrompt(e.target.value)}
-                            placeholder="Tell us what are you drawing, E.g: 'A happy dog'"
+                            placeholder="What are you drawing?"
                         />
                         {!!prompt.length && (
                             <IoCloseCircleSharp
@@ -104,7 +118,7 @@ const CanvasSection = () => {
                                 ) : (
                                     <>
                                         <BsFillFileImageFill className="text-4xl" />
-                                        <span className="capitalize">The result will be shown here</span>
+                                        <span>The result will be shown here</span>
                                     </>
                                 )}
                             </div>
@@ -112,7 +126,7 @@ const CanvasSection = () => {
                         <div className="relative group">
                             <img src={prediction.output[1]} alt={prompt} className="w-full" />
                             <button
-                                className="absolute flex items-center gap-2 top-0 right-0 bg-neutral-800 px-3 py-1 rounded-full m-2 text-neutral-500 font-semibold text-sm tracking-wider opacity-0 group-hover:opacity-100 hover:text-primary"
+                                className="absolute flex items-center gap-2 top-0 right-0 bg-neutral-800 px-3 py-1 rounded-full m-2 text-neutral-500 font-semibold text-sm tracking-wider hover:text-primary"
                                 onClick={() => saveAs(prediction.output[1], `${prediction.input.prompt.replaceAll(' ', '_')}.png`)}
                             >
                                 Download

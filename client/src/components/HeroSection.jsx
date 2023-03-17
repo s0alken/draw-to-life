@@ -19,7 +19,7 @@ const textVariant = {
 const HeroSection = () => {
     return (
         <motion.section
-            className='flex flex-col items-center min-h-screen max-w-4xl mx-auto gap-9 p-9 pb-1 md:flex-row md:justify-between xl:max-w-7xl'
+            className='flex flex-col items-center min-h-screen max-w-4xl mx-auto gap-9 p-9 pb-1 md:flex-row md:justify-center xl:max-w-7xl'
         /* initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }} */
@@ -60,9 +60,18 @@ const HeroSection = () => {
 
             <motion.div
                 className='max-w-sm xl:max-w-lg'
-                initial={{ y: -50 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.5 }}
+                initial={{
+                    y: 50,
+                    opacity: 0
+                }}
+                animate={{
+                    y: 0,
+                    opacity: 1
+                }}
+                transition={{
+                    duration: 1.5,
+                    delay: 1.5
+                }}
 
             >
                 <motion.img
