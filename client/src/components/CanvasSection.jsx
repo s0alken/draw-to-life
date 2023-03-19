@@ -7,6 +7,7 @@ import { BsFillFileImageFill } from 'react-icons/bs';
 import { BiDownload } from 'react-icons/bi';
 import api from "../api";
 import { motion } from "framer-motion";
+import { transitionVariant } from "../utils/motion";
 
 const CanvasSection = () => {
 
@@ -19,6 +20,9 @@ const CanvasSection = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (!prompt.length) return;
+
+        setPrediction({ status: 'starting' });
         setIsLoading(true);
 
         let { data: prediction } = await api.post('/upload', {
@@ -41,48 +45,42 @@ const CanvasSection = () => {
 
     return (
         <motion.section
+            id="canvas-section"
             className='p-3 pb-16'
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true, amount: .25 }}
             variants={{
-                hidden: {
-                    y: 50,
-                    opacity: 0,
-                },
+                hidden: {},
                 visible: {
-                    y: 0,
-                    opacity: 1,
                     transition: {
-                        duration: 1.25
+                        staggerChildren: .3,
+                        delayChildren: .2
                     }
                 }
             }}
         >
-            <div className='mx-auto text-center max-w-sm lg:max-w-xl'>
-                <h1 className='text-white font-black mb-6 text-3xl leading-10 xl:text-5xl'>
-                    Bring Your Drawings to Life with AI
-                </h1>
-                {/* <p className='text-xs font-semibold text-neutral-500 max-w-xs mx-auto mb-6 md:max-w-none xl:text-lg'>
-                    With Draw-to-Life, you can create a masterpiece from a simple sketch. Simply draw your idea in our canvas, and let the AI do the rest.
-                </p> */}
+            <div className='mx-auto text-center'>
+                <motion.h1 variants={transitionVariant} className='text-white font-black mb-6 text-3xl leading-10 xl:text-7xl'>
+                    So, what's all about?
+                </motion.h1>
                 <ul className="text-neutral-500 font-semibold text-lg mb-8 space-y-2">
-                    <li className="flex justify-center items-center gap-2">
+                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-2">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">1</span>
                         <span className="tracking-wider">Draw in the canvas</span>
-                    </li>
-                    <li className="flex justify-center items-center gap-2">
+                    </motion.li>
+                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-2">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">2</span>
                         <span className="tracking-wider">Write in the input a description of your drawing</span>
-                    </li>
-                    <li className="flex justify-center items-center gap-2">
+                    </motion.li>
+                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-2">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">3</span>
                         <span className="tracking-wider">Make it real!</span>
-                    </li>
+                    </motion.li>
                 </ul>
             </div>
 
-            <div className='grid gap-5 p-5 bg-neutral-900 rounded-xl max-w-[400px] w-fit mx-auto lg:max-w-none lg:grid-cols-[400px_400px]'>
-
+            <motion.div variants={transitionVariant} className='grid gap-5 p-5 bg-neutral-900 rounded-xl max-w-[400px] w-fit mx-auto lg:max-w-none lg:grid-cols-[400px_400px]'>
                 <div className='relative rounded-xl overflow-hidden'>
                     <CanvasDraw ref={canvasRef} />
                 </div>
@@ -136,7 +134,7 @@ const CanvasSection = () => {
                     )}
                 </div>
 
-            </div>
+            </motion.div>
 
         </motion.section>
     )
