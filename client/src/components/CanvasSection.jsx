@@ -74,7 +74,7 @@ const CanvasSection = () => {
                 <motion.h1 variants={transitionVariant} className='text-white font-black mb-6 text-3xl leading-10 xl:text-7xl'>
                     So, what's all about?
                 </motion.h1>
-                <ul className="text-neutral-500 font-bold text-xl mb-8 space-y-2">
+                <ul className="text-neutral-500 font-semibold text-xl mb-8 space-y-2">
                     <motion.li variants={transitionVariant} className="flex justify-center items-center gap-3">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-black text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">1</span>
                         <span className="tracking-wider">Draw in the canvas</span>
