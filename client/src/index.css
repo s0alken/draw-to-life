@@ -8,5 +8,6 @@
   html {
     font-family: 'Red Hat Display', sans-serif;
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 }

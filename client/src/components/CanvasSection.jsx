@@ -46,7 +46,7 @@ const CanvasSection = () => {
     return (
         <motion.section
             id="canvas-section"
-            className='p-3 pb-16'
+            className='px-3 pt-6 pb-16'
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: .25 }}
@@ -64,17 +64,17 @@ const CanvasSection = () => {
                 <motion.h1 variants={transitionVariant} className='text-white font-black mb-6 text-3xl leading-10 xl:text-7xl'>
                     So, what's all about?
                 </motion.h1>
-                <ul className="text-neutral-500 font-semibold text-lg mb-8 space-y-2">
-                    <motion.li variants={transitionVariant} className="flex flex-col justify-center items-center gap-2 sm:flex-row">
-                        <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">1</span>
+                <ul className="text-neutral-500 font-bold text-xl mb-8 space-y-2">
+                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-3">
+                        <span className="inline-flex justify-center items-center p-3 rounded-full font-black text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">1</span>
                         <span className="tracking-wider">Draw in the canvas</span>
                     </motion.li>
-                    <motion.li variants={transitionVariant} className="flex flex-col justify-center items-center gap-2 sm:flex-row">
-                        <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">2</span>
-                        <span className="tracking-wider">Write in the input a description of your drawing</span>
+                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-3">
+                        <span className="inline-flex justify-center items-center p-3 rounded-full font-black text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">2</span>
+                        <span className="tracking-wider">Describe your drawing</span>
                     </motion.li>
-                    <motion.li variants={transitionVariant} className="flex flex-col justify-center items-center gap-2 sm:flex-row">
-                        <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">3</span>
+                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-3">
+                        <span className="inline-flex justify-center items-center p-3 rounded-full font-black text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">3</span>
                         <span className="tracking-wider">Make it real!</span>
                     </motion.li>
                 </ul>
@@ -85,7 +85,7 @@ const CanvasSection = () => {
                     <CanvasDraw ref={canvasRef} />
                 </div>
 
-                <form onSubmit={handleSubmit} className='flex flex-col gap-3 lg:flex-row lg:gap-0 lg:order-3 lg:col-span-2'>
+                <form onSubmit={handleSubmit} className='flex flex-col gap-5 lg:flex-row lg:gap-0 lg:order-3 lg:col-span-2'>
                     <div className="relative flex-1">
                         <input
                             type="text"
