@@ -3,6 +3,8 @@
 
 Draw to Life is an AI-powered drawing application that can turn your sketches into realistic images. You can draw directly on the canvas and download the result image. Check out the live demo [HERE](https://draw-to-life.netlify.app/).
 
+![screenshot](https://user-images.githubusercontent.com/57046544/226466361-1583ee29-953a-4ae8-b2eb-6f55f78844f7.png)
+
 ## Technologies used
  - [React](https://es.reactjs.org/)
  - [Tailwind CSS](https://tailwindcss.com/)
