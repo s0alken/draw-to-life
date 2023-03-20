@@ -1,7 +1,7 @@
 
 # Draw to Life
 
-Draw to Life is an AI-powered drawing application that can turn your sketches into realistic images. You can draw directly on the canvas and download the result image.. Check out the live demo [HERE](https://draw-to-life.netlify.app/).
+Draw to Life is an AI-powered drawing application that can turn your sketches into realistic images. You can draw directly on the canvas and download the result image. Check out the live demo [HERE](https://draw-to-life.netlify.app/).
 
 ## Technologies used
  - [React](https://es.reactjs.org/)
@@ -12,7 +12,7 @@ Draw to Life is an AI-powered drawing application that can turn your sketches in
 
 ## How it works
 
-Draw to Life uses a [ControlNet](https://github.com/lllyasviel/ControlNet) model hosted on Replicate to generate refined images using drawings as a template and a text prompt. The app allows you to draw directly on the canvas and then sends the image to the model through an Express Route using the [Replicate API](https://replicate.com/docs).
+Draw to Life uses a [ControlNet](https://github.com/lllyasviel/ControlNet) model hosted on Replicate to generate refined images using drawings as a template and a text prompt. The app allows you to draw directly on the canvas and sends the image to the model through an Express Route using the [Replicate API](https://replicate.com/docs).
 
 ## Running locally
 

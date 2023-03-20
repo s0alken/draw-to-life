@@ -20,7 +20,17 @@ const CanvasSection = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        //if empty prompt, return
         if (!prompt.length) return;
+
+        //if empty canvas, return
+        const ctx = canvasRef.current.getContext('2d');
+
+        const pixelBuffer = new Uint32Array(
+            ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height).data.buffer
+        );
+
+        if(!pixelBuffer.some(color => color !== 4294967295)) return;
 
         setPrediction({ status: 'starting' });
         setIsLoading(true);
@@ -124,7 +134,7 @@ const CanvasSection = () => {
                         <div className="relative group">
                             <img src={prediction.output[1]} alt={prompt} className="w-full" />
                             <button
-                                className="absolute flex items-center gap-2 top-0 right-0 bg-neutral-800 px-3 py-1 rounded-full m-2 text-neutral-500 font-semibold text-sm tracking-wider hover:text-primary"
+                                className="absolute flex items-center gap-2 top-0 right-0 bg-neutral-800 px-3 py-1 rounded-lg m-2 text-neutral-500 font-bold text-sm tracking-wider hover:text-primary"
                                 onClick={() => saveAs(prediction.output[1], `${prediction.input.prompt.replaceAll(' ', '_')}.png`)}
                             >
                                 Download
