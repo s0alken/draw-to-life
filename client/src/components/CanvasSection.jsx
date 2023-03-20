@@ -65,15 +65,15 @@ const CanvasSection = () => {
                     So, what's all about?
                 </motion.h1>
                 <ul className="text-neutral-500 font-semibold text-lg mb-8 space-y-2">
-                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-2">
+                    <motion.li variants={transitionVariant} className="flex flex-col justify-center items-center gap-2 sm:flex-row">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">1</span>
                         <span className="tracking-wider">Draw in the canvas</span>
                     </motion.li>
-                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-2">
+                    <motion.li variants={transitionVariant} className="flex flex-col justify-center items-center gap-2 sm:flex-row">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">2</span>
                         <span className="tracking-wider">Write in the input a description of your drawing</span>
                     </motion.li>
-                    <motion.li variants={transitionVariant} className="flex justify-center items-center gap-2">
+                    <motion.li variants={transitionVariant} className="flex flex-col justify-center items-center gap-2 sm:flex-row">
                         <span className="inline-flex justify-center items-center p-3 rounded-full font-bold text-sm bg-white w-[20px] h-[20px] mix-blend-lighten text-black">3</span>
                         <span className="tracking-wider">Make it real!</span>
                     </motion.li>

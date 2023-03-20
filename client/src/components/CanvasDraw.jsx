@@ -91,42 +91,42 @@ const CanvasDraw = forwardRef((props, canvasRef) => {
                 onPointerUp={stopDrawing}
             />
 
-            <div className='absolute bottom-0 left-0 right-0 m-2 flex flex-wrap justify-between bg-neutral-800 py-2 px-4 text-neutral-500 rounded-full'>
+            <div className='absolute bottom-0 left-0 right-0 m-2 flex flex-wrap justify-between bg-neutral-800 py-3 px-4 text-neutral-500 rounded-lg'>
                 <button
-                    className='flex gap-1 items-center font-semibold disabled:text-neutral-700 hover:text-neutral-400 active:text-neutral-200'
+                    className='flex gap-1 items-center font-bold disabled:text-neutral-700 hover:text-neutral-400 active:text-neutral-200 transition-all duration-200'
                     onClick={undoDrawing}
                     disabled={!selectedIndex}
                 >
-                    <BiUndo className='text-sm' />
-                    <span className='text-xs tracking-wider'>Undo</span>
+                    <BiUndo className='text-sm lg:text-xl' />
+                    <span className='text-[10px] tracking-wider lg:text-[12px]'>Undo</span>
                 </button>
                 <button
-                    className='flex gap-1 items-center font-semibold disabled:text-neutral-700 hover:text-neutral-400 active:text-neutral-200'
+                    className='flex gap-1 items-center font-bold disabled:text-neutral-700 hover:text-neutral-400 active:text-neutral-200 transition-all duration-200'
                     onClick={redoDrawing}
                     disabled={selectedIndex === history.length - 1}
                 >
-                    <BiRedo className='text-sm' />
-                    <span className='text-xs tracking-wider'>Redo</span>
+                    <BiRedo className='text-sm lg:text-xl' />
+                    <span className='text-[10px] tracking-wider lg:text-[12px]'>Redo</span>
                 </button>
                 <button
-                    className={`flex gap-1 items-center font-semibold ${selectedTool === 'pencil' ? 'text-primary' : 'active:text-neutral-200 hover:text-neutral-400'}`}
+                    className={`flex gap-1 items-center font-bold ${selectedTool === 'pencil' ? 'text-primary' : 'active:text-neutral-200 hover:text-neutral-400'} transition-all duration-200`}
                     onClick={() => setSelectedTool('pencil')}
                 >
-                    <BiPencil className='text-sm' />
-                    <span className='text-xs tracking-wider'>Pen</span>
+                    <BiPencil className='text-sm lg:text-xl' />
+                    <span className='text-[10px] tracking-wider lg:text-[12px]'>Pen</span>
                 </button>
                 <button
-                    className={`flex gap-1 items-center font-semibold ${selectedTool === 'eraser' ? 'text-primary' : 'active:text-neutral-200 hover:text-neutral-400'}`}
+                    className={`flex gap-1 items-center font-bold ${selectedTool === 'eraser' ? 'text-primary' : 'active:text-neutral-200 hover:text-neutral-400'} transition-all duration-200`}
                     onClick={() => setSelectedTool('eraser')}
                 >
-                    <BiEraser className='text-sm' />
-                    <span className='text-xs tracking-wider'>Eraser</span>
+                    <BiEraser className='text-sm lg:text-xl' />
+                    <span className='text-[10px] tracking-wider lg:text-[12px]'>Eraser</span>
                 </button>
                 <button
-                    className='flex gap-1 items-center font-semibold hover:text-neutral-400 active:text-neutral-200'
+                    className='flex gap-1 items-center font-bold hover:text-neutral-400 active:text-neutral-200 transition-all duration-200'
                     onClick={clearCanvas}>
-                    <BiTrash className='text-sm' />
-                    <span className='text-xs tracking-wider'>Clean</span>
+                    <BiTrash className='text-sm lg:text-xl' />
+                    <span className='text-[10px] tracking-wider lg:text-[12px]'>Clean</span>
                 </button>
             </div>
         </>
