@@ -11,6 +11,7 @@ Draw to Life is an AI-powered drawing application that can turn your sketches in
  - [Framer Motion](https://www.framer.com/motion/)
  - [Express](https://expressjs.com/)
  - [Node](https://nodejs.org/en/)
+ - [Cloudinary](https://cloudinary.com/)
 
 ## How it works
 

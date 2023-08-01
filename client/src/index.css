@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    font-family: 'Red Hat Display', sans-serif;
+    font-family: 'Hanken Grotesk', sans-serif;
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
