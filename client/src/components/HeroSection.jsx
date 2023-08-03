@@ -23,7 +23,7 @@ const HeroSection = () => {
                 <motion.span variants={transitionVariant} className='inline-block text-[11px] font-black tracking-[4px] uppercase text-primary'>
                     Sketches into realistic images
                 </motion.span>
-                <motion.h1 variants={transitionVariant} className='font-black text-[40px] m-2 leading-10 xl:text-7xl'>
+                <motion.h1 variants={transitionVariant} className='font-black text-[40px] m-0 leading-10 xl:text-7xl'>
                     Bring Your Drawings to Life with AI
                 </motion.h1>
                 <motion.p variants={transitionVariant} className='text-sm text-neutral-500 font-semibold xl:text-lg'>
